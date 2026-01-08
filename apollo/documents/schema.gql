@@ -1,17 +1,21 @@
-schema {
-  query: Query
-}
-
 type Query {
-  users: [User!]!
+  info: String!
+  feed: [Link]!
 }
 
-type User {
-  name: String
+type Link {
+  id: ID!
+  description: String!
+  url: String!
 }
 
-query ALL_USERS {
-  users {
-    name
+type Mutation {
+  post(url: String!, description: String!): Link!
+}
+
+query ALL_Descriptions {
+  feed {
+    id
+    description
   }
 }

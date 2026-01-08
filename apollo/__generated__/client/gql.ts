@@ -14,10 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "query ALL_USERS {\n  users {\n    name\n  }\n}": typeof types.All_UsersDocument,
+    "query ALL_Descriptions {\n  feed {\n    id\n    description\n  }\n}": typeof types.All_DescriptionsDocument,
 };
 const documents: Documents = {
-    "query ALL_USERS {\n  users {\n    name\n  }\n}": types.All_UsersDocument,
+    "query ALL_Descriptions {\n  feed {\n    id\n    description\n  }\n}": types.All_DescriptionsDocument,
 };
 
 /**
@@ -37,7 +37,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "query ALL_USERS {\n  users {\n    name\n  }\n}"): (typeof documents)["query ALL_USERS {\n  users {\n    name\n  }\n}"];
+export function gql(source: "query ALL_Descriptions {\n  feed {\n    id\n    description\n  }\n}"): (typeof documents)["query ALL_Descriptions {\n  feed {\n    id\n    description\n  }\n}"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -9,17 +9,66 @@ const typeDefs = readFileSync(
   "utf-8"
 );
 
+import { PrismaClient } from "@/generated/prisma";
+// import { createLocalRequestContext } from "next/dist/server/after/builtin-request-context";
+// import { I18NProvider } from "next/dist/server/lib/i18n-provider";
+// import { startStandaloneServer } from "@apollo/server/standalone";
+
+const prisma = new PrismaClient();
+
+//  const main = async () => {
+// //   const newLink = await prisma.link.create({
+// //     data: {
+// //       description: "test",
+// //       url: "test",
+// //     },
+// //   });
+//   const allLinks = await prisma.link.findMany();
+//   console.log(allLinks);
+// };
+
+// main()
+//   .catch((e) => {
+//     throw e;
+//   })
+//   .finally(async () => {
+//     prisma.$disconnect();
+//   });
+
 const resolvers: Resolvers = {
   Query: {
-    users() {
-      return [{ name: "Nextjs" }, { name: "Nuxtjs" }, { name: "Sveltekit" }];
+    info: () => "HackerNewsクローン",
+    feed: async (parent, args, context) => {
+      return context.prisma.link.findMany();
+    },
+  },
+  Mutation: {
+    post: (parent, args, context) => {
+      const newLink = context.prisma.link.create({
+        data: {
+          url: args.url,
+          description: args.description,
+        },
+      });
+      return newLink;
+      // const idCount = String(links.length);
+      // const link = {
+      //   id: idCount,
+      //   description: args.description,
+      //   url: args.url,
+      // };
+      // links.push(link);
+      // return link;
     },
   },
 };
 
 const apolloServer = new ApolloServer<Resolvers>({ typeDefs, resolvers });
 
-const handler =  startServerAndCreateNextHandler(apolloServer);
+const handler = startServerAndCreateNextHandler(apolloServer, {
+  context: async () => ({
+    prisma,
+  }),
+});
 
-export {handler as GET, handler as POST}
-
+export { handler as GET, handler as POST };

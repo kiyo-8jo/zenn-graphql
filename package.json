@@ -9,14 +9,15 @@
     "start": "node ",
     "lint": "next lint",
     "compile": "graphql-codegen",
-   "watch": "graphql-codegen -w"
+    "watch": "graphql-codegen -w"
   },
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@apollo/server": "^4.12.2",
     "@as-integrations/next": "^3.2.0",
+    "@prisma/client": "^6.9.0",
     "graphql": "^16.11.0",
-    "next": "15.3.3",
+    "next": "^15.3.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -32,6 +33,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
+    "prisma": "^6.9.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

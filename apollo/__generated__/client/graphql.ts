@@ -16,20 +16,34 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Link = {
+  __typename?: 'Link';
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  post: Link;
+};
+
+
+export type MutationPostArgs = {
+  description: Scalars['String']['input'];
+  url: Scalars['String']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  users: Array<User>;
+  feed: Array<Maybe<Link>>;
+  info: Scalars['String']['output'];
 };
 
-export type User = {
-  __typename?: 'User';
-  name?: Maybe<Scalars['String']['output']>;
-};
-
-export type All_UsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type All_DescriptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type All_UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', name?: string | null }> };
+export type All_DescriptionsQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'Link', id: string, description: string } | null> };
 
 
-export const All_UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ALL_USERS"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<All_UsersQuery, All_UsersQueryVariables>;
+export const All_DescriptionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ALL_Descriptions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"feed"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<All_DescriptionsQuery, All_DescriptionsQueryVariables>;
